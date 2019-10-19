@@ -56,12 +56,18 @@ function App() {
     return () => dispatch({type: 'DELETE', name})
   }
 
+  const enter = (event) => {
+    if (event.key === "Enter") {
+      roll()
+    }
+  }
+
   return (
     <div className="App">
       <div className="row">
         <div className="column">
           <label>Name</label>
-          <input type="text" id="name"/>
+          <input type="text" id="name" onKeyUp={enter}/>
         </div>
 
         <div className="column">
