@@ -3,7 +3,7 @@
   margin-top: 50px;
 
   display: grid;
-  grid-template-columns: 650px;
+  grid-template-columns: 580px;
 
   font-size: 24px;
 
@@ -12,7 +12,12 @@
 
     .column {
       display: grid;
-      grid-template-columns: 225px 225px 100px;
+      grid-template-columns: 225px 225px 30px;
+
+      button.delete {
+        font-size: 18px;
+        width: 30px;
+      }
     }
   }
 }
