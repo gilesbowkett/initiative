@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from 'react'
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const reducer = (state, action) => {
+  switch (action.type) {
+    default:
+      return state
+  }
 }
 
-export default App;
+const initialState = {
+  characters: [
+    {
+      name: 'Tolgar',
+      roll: 17,
+    },
+  ],
+}
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState)
+console.log(state.characters)
+
+  return (
+    <div className="App">
+      <div className="row">
+        <div className="column">
+          <label>Name</label>
+          <input type="text" id="name"/>
+        </div>
+
+        <div className="column">
+          <label>Roll</label>
+          <button/>
+        </div>
+      </div>
+
+      {state.characters.map(({ name, roll }) => (
+        <div className="row">
+          <div className="column">
+            <label>Name</label>
+            <div>{name}</div>
+          </div>
+
+          <div className="column">
+            <label>Roll</label>
+            <div>{roll}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default App
