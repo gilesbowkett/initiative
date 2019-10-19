@@ -35,7 +35,8 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const clickHandler = () => {
-    dispatch({type: 'ROLL', name: 'foo'})
+    const name = document.querySelector("input").value
+    dispatch({type: 'ROLL', name})
   }
 window.wtf = state.characters
   return (
