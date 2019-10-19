@@ -40,7 +40,7 @@ function App() {
       dispatch({type: 'ROLL', name})
     }
   }
-window.wtf = state.characters
+
   return (
     <div className="App">
       <div className="row">
