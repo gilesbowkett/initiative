@@ -1,0 +1,18 @@
+.App {
+  margin-left: 25%;
+  margin-top: 50px;
+
+  display: grid;
+  grid-template-columns: 550px;
+
+  font-size: 24px;
+
+  .row {
+    margin-bottom: 25px;
+
+    .column {
+      display: grid;
+      grid-template-columns: 225px 225px;
+    }
+  }
+}

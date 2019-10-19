@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import './App.css'
+import './App.scss'
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -19,7 +19,6 @@ const initialState = {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
-console.log(state.characters)
 
   return (
     <div className="App">
@@ -31,12 +30,12 @@ console.log(state.characters)
 
         <div className="column">
           <label>Roll</label>
-          <button/>
+          <button>Roll</button>
         </div>
       </div>
 
-      {state.characters.map(({ name, roll }) => (
-        <div className="row">
+      {state.characters.map(({ name, roll }, idx) => (
+        <div className="row" key={idx}>
           <div className="column">
             <label>Name</label>
             <div>{name}</div>
