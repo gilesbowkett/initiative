@@ -9,6 +9,12 @@ const highScoresFirst = (a, b) => {if (a.roll > b.roll) return -1}
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'CLEAR_ALL':
+      return {
+        ...state,
+        characters: [],
+      }
+
     case 'DELETE':
       const minusDeleted = []
       state.characters.forEach((e) => {
@@ -52,15 +58,19 @@ function App() {
     }
   }
 
-  const del = (name) => {
-    return () => dispatch({type: 'DELETE', name})
-  }
+  const del = (name) => (
+    () => dispatch({type: 'DELETE', name})
+  )
 
   const enter = (event) => {
     if (event.key === "Enter") {
       roll()
     }
   }
+
+  const clearAll = () => (
+    dispatch({type: 'CLEAR_ALL'})
+  )
 
   return (
     <div className="App">
@@ -72,10 +82,9 @@ function App() {
 
         <div className="column">
           <label>Roll</label>
-          <button onClick={roll}>Roll</button>
+          <button className="roll" onClick={roll}>Roll</button>
+          <button className="clear-all" onClick={clearAll}>clear all</button>
         </div>
-
-        <div className="column"/>
       </div>
 
       {state.characters.map(({ name, roll }, idx) => (
@@ -88,7 +97,8 @@ function App() {
           <div className="column">
             <label>Roll</label>
             <div>{roll}</div>
-            <div className="column">
+
+            <div>
               <button className="delete" onClick={del(name)}>✗</button>
             </div>
           </div>

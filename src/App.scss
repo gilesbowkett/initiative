@@ -2,22 +2,33 @@
   margin-left: 25%;
   margin-top: 50px;
 
-  display: grid;
-  grid-template-columns: 580px;
-
   font-size: 24px;
 
   .row {
     margin-bottom: 25px;
 
-    .column {
+    .column { /* FIXME: not really a column */
+      margin-bottom: 5px;
       display: grid;
-      grid-template-columns: 225px 225px 30px;
+      grid-template-columns: 100px 225px 30px;
+    }
 
-      button.delete {
-        font-size: 18px;
-        width: 30px;
-      }
+    button.clear-all {
+      width: 75px;
+    }
+
+    button.delete, button.clear-all {
+      margin-left: 20px;
+      align-items: center;
+    }
+
+    button.delete {
+      font-size: 18px;
+      width: 30px;
+    }
+
+    button.roll {
+      height: 35px;
     }
   }
 }
