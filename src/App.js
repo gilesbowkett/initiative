@@ -36,7 +36,9 @@ function App() {
 
   const clickHandler = () => {
     const name = document.querySelector("input").value
-    dispatch({type: 'ROLL', name})
+    if ('' !== name && !/\s/g.test(name)) {
+      dispatch({type: 'ROLL', name})
+    }
   }
 window.wtf = state.characters
   return (
