@@ -5,6 +5,8 @@ function getRandomInt(max) {
   return 1 + Math.floor(Math.random() * Math.floor(max));
 }
 
+const highScoresFirst = (a, b) => {if (a.roll > b.roll) return -1}
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'ROLL':
@@ -13,7 +15,7 @@ const reducer = (state, action) => {
 
       return {
         ...state,
-        characters: chars,
+        characters: chars.sort(highScoresFirst),
       }
     default:
       return state
@@ -24,7 +26,7 @@ const initialState = {
   characters: [
     {
       name: 'Tolgar',
-      roll: 17,
+      roll: 10,
     },
   ],
 }
@@ -35,7 +37,7 @@ function App() {
   const clickHandler = () => {
     dispatch({type: 'ROLL', name: 'foo'})
   }
-
+window.wtf = state.characters
   return (
     <div className="App">
       <div className="row">
