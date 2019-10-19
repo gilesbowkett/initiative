@@ -37,10 +37,6 @@ const reducer = (state, action) => {
 
 const initialState = {
   characters: [
-    {
-      name: 'Tolgar',
-      roll: 10,
-    },
   ],
 }
 
@@ -51,7 +47,7 @@ function App() {
     const name = document.querySelector("input").value
     document.querySelector("input").value = ''
     document.querySelector("input").focus()
-    if ('' !== name && !/\s/g.test(name)) {
+    if ('' !== name && !/^\s*$/g.test(name)) {
       dispatch({type: 'ROLL', name})
     }
   }
