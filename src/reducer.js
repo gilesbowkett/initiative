@@ -3,6 +3,7 @@ import {
   DECREMENT,
   DELETE,
   INCREMENT,
+  MANUAL_ROLL,
   ROLL,
 } from './actions'
 
@@ -49,19 +50,35 @@ const reducer = (state = initialState, action) => {
         modifier: incMod,
       }
 
-    case ROLL:
-      const chars = []
+    case MANUAL_ROLL:
+      const manualRollChars = []
       state.characters.forEach((e) => {
-        chars.push(e)
-      })  
-      chars.push({
+        manualRollChars.push(e)
+      })
+      manualRollChars.push({
+        name: action.manualRoll.name,
+        roll: state.modifier + parseInt(action.manualRoll.amount),
+      })
+
+      return {
+        ...state,
+        characters: manualRollChars.sort(highScoresFirst),
+        modifier: 0,
+      }
+
+    case ROLL:
+      const rollChars = []
+      state.characters.forEach((e) => {
+        rollChars.push(e)
+      })
+      rollChars.push({
         name: action.name,
         roll: state.modifier + getRandomInt(20),
       })
 
       return {
         ...state,
-        characters: chars.sort(highScoresFirst),
+        characters: rollChars.sort(highScoresFirst),
         modifier: 0,
       }
 

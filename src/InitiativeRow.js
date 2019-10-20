@@ -8,13 +8,13 @@ const InitiativeRow = ({ del, character: { name, roll } }) => {
   )
 
   return (
-    <div className="row">
-      <div className="column">
+    <div className="quasi-table">
+      <div className="row">
         <label>Name</label>
         <div>{name}</div>
       </div>
 
-      <div className="column">
+      <div className="row">
         <label>Roll</label>
         <div>{roll}</div>
 

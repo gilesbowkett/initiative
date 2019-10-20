@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Modifier from './Modifier'
-import { clearAll, del, roll } from './actions'
+import { clearAll, del, manualRoll, roll } from './actions'
 
-const NameInput = ({ clearAll, del, roll }) => {
+const NameInput = ({ clearAll, del, manualRoll, roll }) => {
   const refocus = () => {
-    document.querySelector("input").value = ''
-    document.querySelector("input").focus()
+    document.querySelector("#name").value = ''
+    document.querySelector("#manual").value = ''
+    document.querySelector("#name").focus()
   }
 
   const clickClear = () => {
@@ -15,10 +16,18 @@ const NameInput = ({ clearAll, del, roll }) => {
   }
 
   const clickRoll = () => {
-    const name = document.querySelector("input").value
+    const name = document.querySelector("#name").value
+    const manuallyRolledAmount = document.querySelector("#manual").value // FIXME: too jQuery?
+
+    // FIXME: crude
     if ('' !== name && !/^\s*$/g.test(name)) {
-      refocus()
-      roll(name)
+      if ('' === manuallyRolledAmount || /^\s*$/g.test(manuallyRolledAmount)) {
+        refocus()
+        roll(name)
+      } else {
+        refocus()
+        manualRoll(name, manuallyRolledAmount)
+      }
     }
   }
 
@@ -28,25 +37,31 @@ const NameInput = ({ clearAll, del, roll }) => {
     }   
   }
 
+  // FIXME: some UI to alternate between manual entry vs roll button
   return(
-    <div className="row">
-      <div className="column">
+    <div className="quasi-table">
+      <div className="row">
         <label>Name</label>
         <input type="text" id="name" onKeyUp={enter}/>
       </div>
 
-      <div className="column">
+      <div className="row">
         <label>Modifier</label>
         <Modifier/>
       </div>
 
-      <div className="column">
+      <div className="row">
+        <label>Manual</label>
+        <input type="text" id="manual" onKeyUp={enter}/>
+      </div>
+
+      <div className="row">
         <label>Roll</label>
-        <button className="roll" onClick={clickRoll}>Roll</button>
+        <button className="roll" onClick={clickRoll}>Automatic Roll</button>
         <button className="clear-all" onClick={clickClear}>clear all</button>
       </div>
     </div>
   )
 }
 
-export default connect(state => state, { clearAll, del, roll })(NameInput)
+export default connect(state => state, { clearAll, del, manualRoll, roll })(NameInput)

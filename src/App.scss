@@ -4,10 +4,10 @@
 
   font-size: 24px;
 
-  .row {
+  .quasi-table {
     margin-bottom: 25px;
 
-    .column { /* FIXME: not really a column */
+    .row {
       margin-bottom: 5px;
       display: grid;
       grid-template-columns: 100px 225px 30px;
