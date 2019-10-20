@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { del } from './actions'
 
 const InitiativeRow = ({ del, character: { name, roll } }) => {
-  const clickDel = (name) => (
-    () => del(name)
+  const clickDel = () => (
+    del(name)
   )
 
   return (
@@ -19,7 +19,7 @@ const InitiativeRow = ({ del, character: { name, roll } }) => {
         <div>{roll}</div>
 
         <div>
-          <button className="delete" onClick={clickDel(name)}>✗</button>
+          <button className="delete" onClick={clickDel}>✗</button>
         </div>
       </div>
     </div>
