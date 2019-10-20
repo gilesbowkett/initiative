@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react'
 import InitiativeRow from './InitiativeRow'
+import NameInput from './NameInput'
 import { initialState, reducer } from './reducer'
 import './App.scss'
 
@@ -25,24 +26,15 @@ function App() {
     }
   }
 
-  const clearAll = () => (
+  const clearAll = () => {
+    document.querySelector("input").value = ''
+    document.querySelector("input").focus()
     dispatch({type: 'CLEAR_ALL'})
-  )
+  }
 
   return (
     <div className="App">
-      <div className="row">
-        <div className="column">
-          <label>Name</label>
-          <input type="text" id="name" onKeyUp={enter}/>
-        </div>
-
-        <div className="column">
-          <label>Roll</label>
-          <button className="roll" onClick={roll}>Roll</button>
-          <button className="clear-all" onClick={clearAll}>clear all</button>
-        </div>
-      </div>
+      <NameInput enter={enter} roll={roll} clearAll={clearAll}/>
 
       {state.characters.map(({ name, roll }, idx) => (
         <InitiativeRow
