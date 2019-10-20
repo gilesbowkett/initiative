@@ -1,6 +1,8 @@
 import {
   CLEAR_ALL,
+  DECREMENT,
   DELETE,
+  INCREMENT,
   ROLL,
 } from './actions'
 
@@ -11,28 +13,21 @@ function getRandomInt(max) {
 const highScoresFirst = (a, b) => {if (a.roll > b.roll) return -1}
 
 const initialState = {
+  modifier: 0,
   characters: [
-    {
-      name: 'Saber',
-      roll: 20,
-    },
-    {
-      name: 'Tohsaka',
-      roll: 19,
-    },
-    {
-      name: 'Emiya',
-      roll: 1,
-    },
   ],
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case CLEAR_ALL:
+      return initialState
+
+    case DECREMENT:
+      const decMod = state.modifier - 1
       return {
         ...state,
-        characters: [],
+        modifier: decMod,
       }
 
     case DELETE:
@@ -47,16 +42,27 @@ const reducer = (state = initialState, action) => {
         characters: minusDeleted,
       }
 
+    case INCREMENT:
+      const incMod = state.modifier + 1
+      return {
+        ...state,
+        modifier: incMod,
+      }
+
     case ROLL:
       const chars = []
       state.characters.forEach((e) => {
         chars.push(e)
       })  
-      chars.push({name: action.name, roll: getRandomInt(20)})
+      chars.push({
+        name: action.name,
+        roll: state.modifier + getRandomInt(20),
+      })
 
       return {
         ...state,
         characters: chars.sort(highScoresFirst),
+        modifier: 0,
       }
 
     default:

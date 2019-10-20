@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Modifier from './Modifier'
 import { clearAll, del, roll } from './actions'
 
 const NameInput = ({ clearAll, del, roll }) => {
@@ -32,6 +33,11 @@ const NameInput = ({ clearAll, del, roll }) => {
       <div className="column">
         <label>Name</label>
         <input type="text" id="name" onKeyUp={enter}/>
+      </div>
+
+      <div className="column">
+        <label>Modifier</label>
+        <Modifier/>
       </div>
 
       <div className="column">
