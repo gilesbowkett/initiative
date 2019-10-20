@@ -1,19 +1,46 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { clearAll, del, roll } from './actions'
 
-const NameInput = ({ enter, roll, clearAll }) => (
-  <div className="row">
-    <div className="column">
-      <label>Name</label>
-      <input type="text" id="name" onKeyUp={enter}/>
+const NameInput = ({ clearAll, del, roll }) => {
+  const refocus = () => {
+    document.querySelector("input").value = ''
+    document.querySelector("input").focus()
+  }
+
+  const clickClear = () => {
+    refocus()
+    clearAll()
+  }
+
+  const clickRoll = () => {
+    const name = document.querySelector("input").value
+    if ('' !== name && !/^\s*$/g.test(name)) {
+      refocus()
+      roll(name)
+    }
+  }
+
+  const enter = (event) => {
+    if (event.key === "Enter") {
+      clickRoll()
+    }   
+  }
+
+  return(
+    <div className="row">
+      <div className="column">
+        <label>Name</label>
+        <input type="text" id="name" onKeyUp={enter}/>
+      </div>
+
+      <div className="column">
+        <label>Roll</label>
+        <button className="roll" onClick={clickRoll}>Roll</button>
+        <button className="clear-all" onClick={clickClear}>clear all</button>
+      </div>
     </div>
+  )
+}
 
-    <div className="column">
-      <label>Roll</label>
-      <button className="roll" onClick={roll}>Roll</button>
-      <button className="clear-all" onClick={clearAll}>clear all</button>
-    </div>
-  </div>
-)
-
-export default NameInput
-
+export default connect(state => state, { clearAll, del, roll })(NameInput)

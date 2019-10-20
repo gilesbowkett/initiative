@@ -1,21 +1,29 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { del } from './actions'
 
-const InitiativeRow = ({ name, del, roll }) => (
-  <div className="row">
-    <div className="column">
-      <label>Name</label>
-      <div>{name}</div>
-    </div>
+const InitiativeRow = ({ del, character: { name, roll } }) => {
+  const clickDel = (name) => (
+    () => del(name)
+  )
 
-    <div className="column">
-      <label>Roll</label>
-      <div>{roll}</div>
+  return (
+    <div className="row">
+      <div className="column">
+        <label>Name</label>
+        <div>{name}</div>
+      </div>
 
-      <div>
-        <button className="delete" onClick={del(name)}>✗</button>
+      <div className="column">
+        <label>Roll</label>
+        <div>{roll}</div>
+
+        <div>
+          <button className="delete" onClick={clickDel(name)}>✗</button>
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
-export default InitiativeRow
+export default connect(s => s, { del })(InitiativeRow)
