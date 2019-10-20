@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react'
-import './App.scss'
+import InitiativeRow from './InitiativeRow'
 import { initialState, reducer } from './reducer'
+import './App.scss'
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -44,21 +45,14 @@ function App() {
       </div>
 
       {state.characters.map(({ name, roll }, idx) => (
-        <div className="row" key={idx}>
-          <div className="column">
-            <label>Name</label>
-            <div>{name}</div>
-          </div>
-
-          <div className="column">
-            <label>Roll</label>
-            <div>{roll}</div>
-
-            <div>
-              <button className="delete" onClick={del(name)}>✗</button>
-            </div>
-          </div>
-        </div>
+        <InitiativeRow
+          key={idx}
+          state={state}
+          dispatch={dispatch} // FIXME: sounds like React time
+          name={name}
+          roll={roll}
+          del={del}
+        />
       ))}
     </div>
   )
