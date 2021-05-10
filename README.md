@@ -1,3 +1,15 @@
+# Initiative
+
+I don't really remember, but I think this is an unfinished initiative tracker for D&D games.
+
+Dependabot is keeping this project alive, not me.
+I'm just adding this to the README since
+I wouldn't want the relatively frequent activity to mislead anybody
+as to this project's utility or alive-ness.
+The commits reflect the volatility of the underlying ecosystem and nothing more.
+
+# Boilerplate
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
